@@ -81,7 +81,7 @@ Give your answer as a type expression in the format used by TYPE1 (e.g., `[int=>
 ### ANSWER
 
 ```
-your answer here
+[int=>int]
 ```
 
 ## Q3: Identifying Type Errors
@@ -95,7 +95,7 @@ if add1(0) then +(4,5) else {let p=proc():int 9 in p}
 ### ANSWER
 
 ```
-your answer here
+the clause add1(0) evaluated to a int type, it required a bool type and the then and else branches do not have the same type, the then branch has int type while the else evaluated to the last expression
 ```
 
 ## Q4: Creating Type Error Examples
@@ -105,43 +105,44 @@ Below are the type errors that TYPE1's checker detects. For each error, create a
 ### An attempt to define a procedure whose declared return type does not match the type of the body of the procedure
 
 ```
-
+proc(x:bool):int add1(x)
 ```
 
 ### An attempt to apply a non-procedure as a procedure
 
 ```
-
+let x = 1 in .x(5)
 ```
 
 ### An attempt to apply a procedure to the wrong number of actual parameters
 
 ```
-
+let p = proc(x:int):int x in .p(1, 2)
 ```
 
 ### An attempt to apply a procedure to actual parameters whose types do not match the declared types of the corresponding formal parameters
 
 ```
-
+let p = proc(x:int):itn x in .p(true)
 ```
 
 ### An attempt to use a non-boolean as the test in an if statement
 
 ```
-
+if 1 then 2 else 3
 ```
 
 ### An attempt to have expressions of different types in the then and else parts of an if statement
 
 ```
-
+if true then 1 else false
 ```
 
 ### An attempt to assign a value to a LHS variable in a set expression where the type of the variable does not match the type of the RHS expression
 
 ```
-
+declare x: int
+(set x = true ; x)
 ```
 
 ## Additional Exercises (Optional)
