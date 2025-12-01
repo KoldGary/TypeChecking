@@ -1,3 +1,4 @@
+
 # PA7: Type Checker
 
 ## Overview
@@ -81,7 +82,8 @@ Give your answer as a type expression in the format used by TYPE1 (e.g., `[int=>
 ### ANSWER
 
 ```
-your answer here
+int=>int
+.p(q) 
 ```
 
 ## Q3: Identifying Type Errors
@@ -95,7 +97,9 @@ if add1(0) then +(4,5) else {let p=proc():int 9 in p}
 ### ANSWER
 
 ```
-your answer here
+add1(0) does not produce a boolean
+
+the "Then" and "Else" have different branch types
 ```
 
 ## Q4: Creating Type Error Examples
@@ -105,42 +109,54 @@ Below are the type errors that TYPE1's checker detects. For each error, create a
 ### An attempt to define a procedure whose declared return type does not match the type of the body of the procedure
 
 ```
+proc(x:int):bool 5
+Body is 5 (int) but return type is bool.
 
 ```
 
 ### An attempt to apply a non-procedure as a procedure
 
 ```
-
+.5(3)
+5 is not a procedure, but is used as one.
 ```
 
 ### An attempt to apply a procedure to the wrong number of actual parameters
 
 ```
+.proc(x:int):int x(3, 4)
+Procedure takes 1 argument; call supplies 2.
 
 ```
 
 ### An attempt to apply a procedure to actual parameters whose types do not match the declared types of the corresponding formal parameters
 
 ```
+.proc(x:int):int x(true)
+Procedure expects int, but the argument gives a bool.
 
 ```
 
 ### An attempt to use a non-boolean as the test in an if statement
 
 ```
+if 3 then 4 else 5
+The test must be a boolean, but the 3 is in causing it to fail.
 
 ```
 
 ### An attempt to have expressions of different types in the then and else parts of an if statement
 
 ```
+if true then 5 else proc(x:int):int x
+then is int, else is a procedure type → mismatch.
 
 ```
 
 ### An attempt to assign a value to a LHS variable in a set expression where the type of the variable does not match the type of the RHS expression
 
 ```
+let x = 5 in set x = true
 
 ```
 
